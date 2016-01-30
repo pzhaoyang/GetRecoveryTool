@@ -1,0 +1,9 @@
+---- txtUserInfo Matches (8 in 4 files) ----
+MainWindow.g.cs (GetRecoveryKeyTool\obj\Release):        internal System.Windows.Controls.TextBox txtUserInfo;
+MainWindow.g.cs (GetRecoveryKeyTool\obj\Release):            this.txtUserInfo = ((System.Windows.Controls.TextBox)(target));
+MainWindow.g.i.cs (GetRecoveryKeyTool\obj\Debug):        internal System.Windows.Controls.TextBox txtUserInfo;
+MainWindow.g.i.cs (GetRecoveryKeyTool\obj\Debug):            this.txtUserInfo = ((System.Windows.Controls.TextBox)(target));
+MainWindow.g.i.cs (GetRecoveryKeyTool\obj\Release):        internal System.Windows.Controls.TextBox txtUserInfo;
+MainWindow.g.i.cs (GetRecoveryKeyTool\obj\Release):            this.txtUserInfo = ((System.Windows.Controls.TextBox)(target));
+MainWindow.xaml.cs (GetRecoveryKeyTool):            txtUserInfo.Text = result;
+MainWindow.xaml.cs (GetRecoveryKeyTool):            txtUserInfo.Text = "";

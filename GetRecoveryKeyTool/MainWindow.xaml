@@ -3,10 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="GetRecoveryKeyTool" Height="500" Width="700" Unloaded="Window_Unloaded">
     <Grid>
-        <Image Height="110" HorizontalAlignment="Left" Margin="12,12,0,0" Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="110" />
-        <TextBox Height="110" HorizontalAlignment="Left" Margin="12,128,0,0" Name="txtUserInfo" VerticalAlignment="Top" Width="654" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
-        <Button Content="Click to Sign In" Height="23" HorizontalAlignment="Center" Margin="261,99,260,0" Name="btnSignIn" VerticalAlignment="Top" Width="157" Click="btnSignIn_Click" />
-        <TextBox Height="172" HorizontalAlignment="Left" Margin="12,244,0,0" Name="txtToken" VerticalAlignment="Top" Width="654" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
-        <Button Content="Clear App Settings" Height="23" HorizontalAlignment="Left" Margin="12,426,0,0" Name="btnClear" VerticalAlignment="Top" Width="162" Click="btnClear_Click" />
+        <Image Height="83" HorizontalAlignment="Left" Margin="12,12,0,0" Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="82" />
+        <TextBox Height="174" HorizontalAlignment="Left" Margin="12,128,0,0" Name="txtUserInfo" VerticalAlignment="Top" Width="312" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <Button Content=" Sign In" Height="23" HorizontalAlignment="Center" Margin="370,99,263,0" Name="btnSignIn" VerticalAlignment="Top" Width="59" Click="btnSignIn_Click" />
+        <TextBox Height="174" HorizontalAlignment="Left" Margin="329,128,0,0" Name="txtToken" VerticalAlignment="Top" Width="353" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <Button Content="Clear App Settings" Height="23" HorizontalAlignment="Left" Margin="12,100,0,0" Name="btnClear" VerticalAlignment="Top" Width="94" Click="btnClear_Click" />
+        <Button Content="GetRecovery" Height="24" HorizontalAlignment="Left" Margin="12,332,0,0" Name="btnGetRecovery" VerticalAlignment="Top" Width="94" Click="btnGetRecovery_Click" />
     </Grid>
 </Window>

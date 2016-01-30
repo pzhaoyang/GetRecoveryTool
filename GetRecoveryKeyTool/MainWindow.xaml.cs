@@ -21,6 +21,35 @@ namespace GetRecoveryKeyTool
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+    // [TCL-zhaoyang.peng-2016-01-18] add enum {
+    /// <summary>
+    /// Result of the unprotect operation
+    /// </summary>
+    public enum UnprotectResult
+    {
+        /// <summary>
+        /// Device was not found in DDS
+        /// </summary>
+        DeviceNotFound,
+
+        /// <summary>
+        /// Device was already unprotected
+        /// </summary>
+        DeviceAlreadyUnprotected,
+
+        /// <summary>
+        /// Device has been unprotected
+        /// </summary>
+        DeviceUnprotected,
+
+        /// <summary>
+        /// IF we find more than 1 device, we don't currently have a way to resolve the conflict. So, we don't unprotect.
+        /// </summary>
+        MultipleDevicesFound,
+    }
+    // [TCL-zhaoyang.peng-2016-01-18] add enum }
+
     public partial class MainWindow : Window
     {
         static string client_id = "000000004C177416";
@@ -30,6 +59,7 @@ namespace GetRecoveryKeyTool
             client_id, client_secret);
         static string apiUrl = @"https://apis.live.net/v5.0/";
         public Dictionary<string, string> tokenData = new Dictionary<string, string>();
+        CookieContainer cookie = new CookieContainer();
 
         public MainWindow()
         {
@@ -38,14 +68,16 @@ namespace GetRecoveryKeyTool
 
         private void getAccessToken()
         {
-            if (true)//App.Current.Properties.Contains("auth_code"))
+            if (App.Current.Properties.Contains("auth_code"))
             {
+                Console.WriteLine("[TCL]App.Current.Properties[\"auth_code\"] = " + App.Current.Properties["auth_code"]);
                 makeAccessTokenRequest(accessTokenUrl + App.Current.Properties["auth_code"]);
             }
         }
 
         private void makeAccessTokenRequest(string requestUrl)
         {
+            Console.WriteLine("[TCL] makeAccessTokenRequest requestUrl=" + requestUrl);
             WebClient wc = new WebClient();
             Console.WriteLine("[TCL]makeAccessTokenRequest parameter:" + requestUrl);
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(accessToken_DownloadStringCompleted);
@@ -54,6 +86,7 @@ namespace GetRecoveryKeyTool
 
         void accessToken_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            Console.WriteLine("[TCL] accessToken_DownloadStringCompleted e=" + e);
             tokenData = deserializeJson(e.Result);
             if (tokenData.ContainsKey("access_token"))
             {
@@ -115,6 +148,63 @@ namespace GetRecoveryKeyTool
             imgUser.Source = null;
             txtUserInfo.Text = "";
         }
+
+        //[TCL-zhaoyang.peng-2016-1-30] for a GetRecovery {
+
+        private string HttpPost(string Url, string postDataStr)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
+            request.CookieContainer = cookie;
+            Stream myRequestStream = request.GetRequestStream();
+            StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
+            myStreamWriter.Write(postDataStr);
+            myStreamWriter.Close();
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            response.Cookies = cookie.GetCookies(response.ResponseUri);
+            Stream myResponseStream = response.GetResponseStream();
+            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            string retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+
+            return retString;
+        }
+
+        public string HttpGet(string Url, string postDataStr)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url + (postDataStr == "" ? "" : "?") + postDataStr);
+            request.Method = "GET";
+            request.ContentType = "text/html;charset=UTF-8";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream myResponseStream = response.GetResponseStream();
+            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            string retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+
+            return retString;
+        }
+
+        private void btnGetRecovery_Click(object sender, RoutedEventArgs e)
+        { 
+            string sRet;
+            string PartnerName = "ALCATELONETOUCH";
+            string DeviceId = "014551000024691";
+            string GetRecoveryKeyUrl = 
+                String.Format(@"https://cs.dds.microsoft.com/Command/ExternalClientCert/AdministrativeUnprotect/{{0}}/{{1}}", PartnerName, DeviceId);
+
+            sRet = HttpPost(GetRecoveryKeyUrl, "");
+            Console.WriteLine("[TCL] sRet=" + sRet);
+
+
+        }
+        //[TCL-zhaoyang.peng-2016-1-30] for a GetRecovery }
 
         void browser_Closed(object sender, EventArgs e)
         {
