@@ -16,11 +16,12 @@ namespace GetRecoveryKeyTool
 {
     public partial class BrowserWindow : Window
     {
-        static string scope ="wl.basic"; //"dds.reverse_logistics"
+        static string scope = "dds.reverse_logistics";//"dds.reverse_logistics";//"wl.basic"; //"dds.reverse_logistics"
         static string client_id = "000000004C177416";
-        static Uri signInUrl = new Uri(String.Format(@"https://login.live.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope={1}", client_id, scope));
+        static Uri signInUrl = new Uri(String.Format(@"https://login.live.com/oauth20_authorize.srf?client_id={0}&scope={1}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code", client_id, scope));
+        //static Uri signInUrl = new Uri(String.Format(@"https://cs.dds.microsoft.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://cs.dds.microsoft.com/oauth20_desktop.srf&response_type=code&scope={1}", client_id, scope));
         MainWindow mainWindow = new MainWindow();
-
+        
         public BrowserWindow()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace GetRecoveryKeyTool
                     App.Current.Properties.Clear();
                 }
                 string auth_code = Regex.Split(e.Uri.AbsoluteUri, "code=")[1];
+                Console.WriteLine("[TCL]auth_code=" + auth_code);
                 App.Current.Properties.Add("auth_code", auth_code);
                 this.Close();
             }

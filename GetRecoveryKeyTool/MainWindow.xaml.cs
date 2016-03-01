@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Web.Script.Serialization;
 using System.Net;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
+
 
 namespace GetRecoveryKeyTool
 {
@@ -57,7 +59,12 @@ namespace GetRecoveryKeyTool
         static string accessTokenUrl = String.Format(
             @"https://login.live.com/oauth20_token.srf?client_id={0}&client_secret={1}&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=",
             client_id, client_secret);
+        //static string accessTokenUrl = String.Format(
+            //@"https://login.live.com/oauth20_token.srf?client_id={0}&client_secret={1}&redirect_uri=https://cs.dds.microsoft.com/oauth20_desktop.srf&grant_type=authorization_code&code=",
+            //client_id, client_secret);
         static string apiUrl = @"https://apis.live.net/v5.0/";
+        //static string apiUrl = @"https://cs.dds.microsoft.com/Command/ExternalClientCert/AdministrativeUnprotect/ALCATELONETOUCH/014551000024691";
+        
         public Dictionary<string, string> tokenData = new Dictionary<string, string>();
         CookieContainer cookie = new CookieContainer();
 
@@ -86,12 +93,12 @@ namespace GetRecoveryKeyTool
 
         void accessToken_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            Console.WriteLine("[TCL] accessToken_DownloadStringCompleted e=" + e);
+            Console.WriteLine("[TCL] accessToken_DownloadStringCompleted e.Result=" + e.Result);
             tokenData = deserializeJson(e.Result);
             if (tokenData.ContainsKey("access_token"))
             {
                 App.Current.Properties.Add("access_token", tokenData["access_token"]);
-                getUserInfo();
+                //getUserInfo();
             }
         }
 
@@ -157,7 +164,7 @@ namespace GetRecoveryKeyTool
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
-            request.CookieContainer = cookie;
+            //request.CookieContainer = cookie;
             Stream myRequestStream = request.GetRequestStream();
             StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
             myStreamWriter.Write(postDataStr);
@@ -192,17 +199,35 @@ namespace GetRecoveryKeyTool
         }
 
         private void btnGetRecovery_Click(object sender, RoutedEventArgs e)
-        { 
-            string sRet;
-            string PartnerName = "ALCATELONETOUCH";
-            string DeviceId = "014551000024691";
-            string GetRecoveryKeyUrl = 
-                String.Format(@"https://cs.dds.microsoft.com/Command/ExternalClientCert/AdministrativeUnprotect/{{0}}/{{1}}", PartnerName, DeviceId);
+        {
+            string RecoveryKeyAPI = @"https://cs.dds.microsoft.com/Command/ExternalClientCert/AdministrativeUnprotect/YanLi/ImeiOrMeid[014551000025599]";    
+            if (App.Current.Properties.Contains("access_token")) {
+                Console.WriteLine("[TCL] RecoveryKeyAPI =" + RecoveryKeyAPI);
+                Console.WriteLine("[TCL] access_token =" + App.Current.Properties["access_token"]);
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(RecoveryKeyAPI);
+                request.ClientCertificates.Add(X509Certificate.CreateFromCertFile("SysDevPub.cer"));
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.Headers.Add("Authorization", "" + App.Current.Properties["access_token"]);
+                Stream myRequestStream = request.GetRequestStream();
+                StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
 
-            sRet = HttpPost(GetRecoveryKeyUrl, "");
-            Console.WriteLine("[TCL] sRet=" + sRet);
+                myStreamWriter.Write("");
+                myStreamWriter.Close();
 
 
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                response.Cookies = cookie.GetCookies(response.ResponseUri);
+                Stream myResponseStream = response.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("UTF-8"));
+                string retString = myStreamReader.ReadToEnd();
+                Console.WriteLine("[TCL] retString=" + retString);
+                myStreamReader.Close();
+                myResponseStream.Close();
+
+            } else {
+                Console.WriteLine("[TCL] error");
+            }
         }
         //[TCL-zhaoyang.peng-2016-1-30] for a GetRecovery }
 

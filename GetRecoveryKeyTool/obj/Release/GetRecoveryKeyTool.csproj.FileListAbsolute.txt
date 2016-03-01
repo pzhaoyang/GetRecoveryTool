@@ -1,0 +1,14 @@
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\bin\Release\GetRecoveryKeyTool.exe.config
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\bin\Release\GetRecoveryKeyTool.exe
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\bin\Release\GetRecoveryKeyTool.pdb
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\MainWindow.baml
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\BrowserWindow.baml
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\MainWindow.g.cs
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\BrowserWindow.g.cs
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\App.g.cs
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool_MarkupCompile.cache
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool.g.resources
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool.Properties.Resources.resources
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool.csproj.GenerateResource.Cache
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool.exe
+D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Release\GetRecoveryKeyTool.pdb
