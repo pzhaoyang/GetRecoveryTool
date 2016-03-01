@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="GetRecoveryKeyTool" Height="500" Width="700" Unloaded="Window_Unloaded">
     <Grid>
-        <Image Height="83" HorizontalAlignment="Left" Margin="12,12,0,0" Name="imgUser" Stretch="Fill" VerticalAlignment="Top" Width="82" />
-        <TextBox Height="174" HorizontalAlignment="Left" Margin="12,128,0,0" Name="txtUserInfo" VerticalAlignment="Top" Width="312" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
-        <Button Content=" Sign In" Height="23" HorizontalAlignment="Center" Margin="370,99,263,0" Name="btnSignIn" VerticalAlignment="Top" Width="59" Click="btnSignIn_Click" />
-        <TextBox Height="174" HorizontalAlignment="Left" Margin="329,128,0,0" Name="txtToken" VerticalAlignment="Top" Width="353" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
-        <Button Content="Clear App Settings" Height="23" HorizontalAlignment="Left" Margin="12,100,0,0" Name="btnClear" VerticalAlignment="Top" Width="94" Click="btnClear_Click" />
-        <Button Content="GetRecovery" Height="24" HorizontalAlignment="Left" Margin="12,332,0,0" Name="btnGetRecovery" VerticalAlignment="Top" Width="94" Click="btnGetRecovery_Click" />
+        <TextBox Height="207" HorizontalAlignment="Left" Margin="10,171,0,0" Name="ReadyIMEI" VerticalAlignment="Top" Width="134" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <Button Content="SignIn" Height="22" HorizontalAlignment="Center" Margin="608,26,25,0" Name="btnSignIn" VerticalAlignment="Top" Width="59" Click="btnSignIn_Click" />
+        <TextBox Height="80" HorizontalAlignment="Left" Margin="10,66,0,0" Name="txtToken" VerticalAlignment="Top" Width="640" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <Button Content="Clear App Settings" Height="23" HorizontalAlignment="Left" Margin="10,25,0,0" Name="btnClear" VerticalAlignment="Top" Width="94" Click="btnClear_Click" />
+        <Button Content="Start UnProtect" Height="47" HorizontalAlignment="Left" Margin="236,412,0,0" Name="btnGetRecovery" VerticalAlignment="Top" Width="120" Click="btnGetRecovery_Click" />
+        <TextBox Height="207" HorizontalAlignment="Left" Margin="184,171,0,0" x:Name="UnprotectionResult" VerticalAlignment="Top" Width="466" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>

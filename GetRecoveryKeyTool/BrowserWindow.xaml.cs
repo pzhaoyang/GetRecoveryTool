@@ -16,14 +16,12 @@ namespace GetRecoveryKeyTool
 {
     public partial class BrowserWindow : Window
     {
-        static string scope = "dds.reverse_logistics";//"dds.reverse_logistics";//"wl.basic"; //"dds.reverse_logistics"
+        static string scope = "dds.reverse_logistics";
         static string client_id = "000000004C177416";
         static Uri signInUrl = new Uri(String.Format(@"https://login.live.com/oauth20_authorize.srf?client_id={0}&scope={1}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code", client_id, scope));
-        //static Uri signInUrl = new Uri(String.Format(@"https://cs.dds.microsoft.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://cs.dds.microsoft.com/oauth20_desktop.srf&response_type=code&scope={1}", client_id, scope));
         MainWindow mainWindow = new MainWindow();
         
-        public BrowserWindow()
-        {
+        public BrowserWindow(){
             InitializeComponent();
             Console.WriteLine("[TCL]url = " + signInUrl);
             webBrowser.Navigate(signInUrl);
