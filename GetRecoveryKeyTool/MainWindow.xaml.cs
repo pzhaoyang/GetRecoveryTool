@@ -102,6 +102,8 @@ namespace GetRecoveryKeyTool
             Console.WriteLine("[TCL] RecoveryKeyAPI =" + RecoveryKeyAPI);
             Console.WriteLine("[TCL] access_token =" + App.Current.Properties["access_token"]);
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(RecoveryKeyAPI);
+            HttpWebResponse response = null;
+            string retString = null;
             request.ClientCertificates.Add(X509Certificate.CreateFromCertFile("SysDevPub.cer"));
             request.Method = "POST";
             request.ContentType = "application/json";
@@ -113,13 +115,31 @@ namespace GetRecoveryKeyTool
             myStreamWriter.Close();
 
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream myResponseStream = response.GetResponseStream();
-            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("UTF-8"));
-            string retString = myStreamReader.ReadToEnd();
-            Console.WriteLine("[TCL] retString=" + retString);
-            myStreamReader.Close();
-            myResponseStream.Close();
+            try {
+                response = (HttpWebResponse)request.GetResponse();
+                Stream myResponseStream = response.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("UTF-8"));
+                retString = myStreamReader.ReadToEnd();
+                Console.WriteLine("[TCL] retString=" + retString);
+                myStreamReader.Close();
+                myResponseStream.Close();
+            }
+            catch (System.Net.WebException)
+            {
+                System.Console.WriteLine("Response = " + response == null ? "NULL" : response.StatusDescription);
+              /*  if (response == null)
+                {
+                    MessageBox.Show("Error Code" + response == null ? "NULL" : response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
+                }
+                else {
+                    MessageBox.Show("Error Code" + response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
+                }*/
+            }
+            //if (response.StatusCode != HttpStatusCode.OK) {
+                
+            //}
+
+
 
             return retString;
         }
