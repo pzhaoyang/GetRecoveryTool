@@ -30,7 +30,7 @@ namespace GetRecoveryKeyTool
         static string client_id = "000000004C177416";
         static string client_secret = "8-578PFr0Gr27VgY78WDydR6I5VEEpiT";
 
-        static string PartnerName = "YanLi";
+        static string PartnerName = "ALCATELONETOUCH";//"YanLi";
         static string ReadyForUnProtectionIMEI ="";//"014551000025599";
         
         static string accessTokenUrl = String.Format(

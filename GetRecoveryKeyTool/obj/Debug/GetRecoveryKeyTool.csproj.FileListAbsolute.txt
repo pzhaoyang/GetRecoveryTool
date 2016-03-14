@@ -12,3 +12,17 @@ D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj
 D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.csproj.GenerateResource.Cache
 D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.exe
 D:\tcl_projects\wp\software\anti-theif\GetRecoveryKeyTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.pdb
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\bin\Debug\GetRecoveryKeyTool.exe.config
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\bin\Debug\GetRecoveryKeyTool.exe
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\bin\Debug\GetRecoveryKeyTool.pdb
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\MainWindow.baml
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\BrowserWindow.baml
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\MainWindow.g.cs
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\BrowserWindow.g.cs
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\App.g.cs
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool_MarkupCompile.cache
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.g.resources
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.Properties.Resources.resources
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.csproj.GenerateResource.Cache
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.exe
+D:\zhaoyang\ResetProtection\GetRecoveryTool\GetRecoveryKeyTool\obj\Debug\GetRecoveryKeyTool.pdb
