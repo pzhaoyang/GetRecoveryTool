@@ -99,19 +99,20 @@ namespace GetRecoveryKeyTool
 
         private string HttpPost(string Url, string postDataStr)
         {
+            string accesstk = "" + App.Current.Properties["access_token"];
             Console.WriteLine("[TCL] RecoveryKeyAPI =" + RecoveryKeyAPI);
-            Console.WriteLine("[TCL] access_token =" + App.Current.Properties["access_token"]);
+            Console.WriteLine("[TCL] access_token =" + accesstk);
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(RecoveryKeyAPI);
             HttpWebResponse response = null;
             string retString = null;
             request.ClientCertificates.Add(X509Certificate.CreateFromCertFile("SysDevPub.cer"));
             request.Method = "POST";
             request.ContentType = "application/json";
-            request.Headers.Add("Authorization", "" + App.Current.Properties["access_token"]);
+            request.Headers.Add("Authorization", accesstk);
             Stream myRequestStream = request.GetRequestStream();
             StreamWriter myStreamWriter = new StreamWriter(myRequestStream, Encoding.GetEncoding("gb2312"));
 
-            myStreamWriter.Write("");
+            myStreamWriter.Write("N/A");
             myStreamWriter.Close();
 
 
@@ -124,16 +125,19 @@ namespace GetRecoveryKeyTool
                 myStreamReader.Close();
                 myResponseStream.Close();
             }
-            catch (System.Net.WebException)
+            catch (System.Net.WebException ex)
             {
-                System.Console.WriteLine("Response = " + response == null ? "NULL" : response.StatusDescription);
-              /*  if (response == null)
-                {
-                    MessageBox.Show("Error Code" + response == null ? "NULL" : response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
-                }
-                else {
-                    MessageBox.Show("Error Code" + response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
-                }*/
+
+                MessageBox.Show("The account is not available：" + ((System.Net.HttpWebResponse)ex.Response).StatusCode, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //    retString = (System.Net.HttpWebResponse)ex.Response.ToString;
+                //System.Console.WriteLine("[TCL] ExCeptionMessage=" + ((System.Net.HttpWebResponse)ex.Response).StatusCode);
+                /*  if (response == null)
+                  {
+                      MessageBox.Show("Error Code" + response == null ? "NULL" : response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
+                  }
+                  else {
+                      MessageBox.Show("Error Code" + response.StatusCode.ToString(), "Error", MessageBoxButton.OK);
+                  }*/
             }
             //if (response.StatusCode != HttpStatusCode.OK) {
                 
@@ -157,16 +161,24 @@ namespace GetRecoveryKeyTool
             foreach (string imei in aIMEIs){
                  if (App.Current.Properties.Contains("access_token")){
                      string result = HttpPost(GetIMEI_From_Input(PartnerName, imei), "");
-                     JsonResult = deserializeJson(result);
-                     if (JsonResult.ContainsKey("UnprotectResult")){
-                         if (JsonResult["UnprotectResult"].Equals("DeviceUnprotected") || JsonResult["UnprotectResult"].Equals("DeviceAlreadyUnprotected")){
-                             UnprotectionResult.Text += imei + ": " + JsonResult["UnprotectResult"] + " " + JsonResult["RecoveryKey"] + "\r\n";
-                         }else{
-                             UnprotectionResult.Text += imei + ": " + JsonResult["UnprotectResult"] + "\r\n";
-                         }
-                     } else {
-                         UnprotectionResult.Text += imei + ": " + "GetRecoveryKeyError" + "\r\n";
-                     }
+                    if (result != null){
+                        JsonResult = deserializeJson(result);
+                        if (JsonResult.ContainsKey("UnprotectResult"))
+                        {
+                            if (JsonResult["UnprotectResult"].Equals("DeviceUnprotected") || JsonResult["UnprotectResult"].Equals("DeviceAlreadyUnprotected"))
+                            {
+                                UnprotectionResult.Text += imei + ": " + JsonResult["UnprotectResult"] + " " + JsonResult["RecoveryKey"] + "\r\n";
+                            }
+                            else
+                            {
+                                UnprotectionResult.Text += imei + ": " + JsonResult["UnprotectResult"] + "\r\n";
+                            }
+                        }
+                        else
+                        {
+                            UnprotectionResult.Text += imei + ": " + "GetRecoveryKeyError" + "\r\n";
+                        }
+                    }
                  }
             }
         }
